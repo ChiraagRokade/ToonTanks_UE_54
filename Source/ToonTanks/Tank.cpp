@@ -4,6 +4,7 @@
 #include "Tank.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/InputComponent.h"
 
 ATank::ATank()
 {
@@ -12,4 +13,20 @@ ATank::ATank()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
+}
+
+// Called to bind functionality to input
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
+    
+    PlayerInputComponent->BindAxis("MoveForward", this, &ATank::Move);
+}
+
+void ATank::Move(float Value){
+    FVector DeltaLocation = FVector::ZeroVector;
+    DeltaLocation.X = Value * Speed * GetWorld()->DeltaTimeSeconds;
+    AddActorLocalOffset(DeltaLocation, true);
+
+    // UE_LOG(LogTemp, Display, TEXT("Value %h"), DeltaLocation);
 }
