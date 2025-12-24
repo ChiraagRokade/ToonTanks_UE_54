@@ -36,7 +36,7 @@ private:
 	class UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float Speed = 200.f;
+	float Speed = 350.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float TurnRate = 100.f;
@@ -46,5 +46,4 @@ private:
 	void Turn(float Value);
 
 	APlayerController* PlayerControllerRef;
-
 };

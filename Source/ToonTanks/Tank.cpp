@@ -2,7 +2,6 @@
 
 
 #include "Tank.h"
-#include "BasePawn.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -25,6 +24,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
     
     PlayerInputComponent->BindAxis("MoveForward", this, &ATank::Move);
     PlayerInputComponent->BindAxis("Turn", this, &ATank::Turn);
+
+    PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATank::Fire);
 }
 
 // Called when the game starts or when spawned
@@ -72,3 +73,4 @@ void ATank::Turn(float Value){
     DeltaRotation.Yaw = Value * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
     AddActorLocalRotation(DeltaRotation, true);
 }
+
