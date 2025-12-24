@@ -15,9 +15,13 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* TurretMesh;
+
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void RotateTurret(FVector LookAtTarget);
+
+	void Fire();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
@@ -26,8 +30,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* TurretMesh;
+	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
@@ -37,9 +40,5 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Super", meta = (AllowPrivateAccess = "true"))
 	int32 EditAnywhereInt = 22;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };
