@@ -25,7 +25,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
     
     PlayerInputComponent->BindAxis("MoveForward", this, &ATank::Move);
     PlayerInputComponent->BindAxis("Turn", this, &ATank::Turn);
-    PlayerInputComponent->BindAxis("RotateTurret", this, &ATank::RotateTurret);
 }
 
 // Called when the game starts or when spawned
@@ -34,8 +33,6 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 	
     PlayerControllerRef = Cast<APlayerController>(GetController());
-    GamepadInputControllerRef = Cast<APlayerController>(GetController());
-
 }
 
 // Called every frame
@@ -74,16 +71,4 @@ void ATank::Turn(float Value){
     FRotator DeltaRotation = FRotator::ZeroRotator;
     DeltaRotation.Yaw = Value * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
     AddActorLocalRotation(DeltaRotation, true);
-}
-
-void ATank::RotateTurret(float Value){
-    if (FMath::Abs(Value) > 0.05f)
-    {
-        float RotateAmount = Value * TurretRotationSpeed * UGameplayStatics::GetWorldDeltaSeconds(this);
-        FRotator DeltaRotation = FRotator(0.f, RotateAmount, 0.f);
-        if(TurretMesh)
-        {
-            TurretMesh->AddLocalRotation(DeltaRotation);
-        }
-    }
 }

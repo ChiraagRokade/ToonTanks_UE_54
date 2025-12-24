@@ -27,8 +27,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void RotateTurret(float Value);
-	
 private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -48,7 +46,5 @@ private:
 	void Turn(float Value);
 
 	APlayerController* PlayerControllerRef;
-
-	APlayerController* GamepadInputControllerRef;
 
 };
