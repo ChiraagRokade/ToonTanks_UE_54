@@ -2,4 +2,16 @@
 
 
 #include "ToonTanksPlayerController.h"
+#include "GameFramework/Pawn.h"
 
+void AToonTanksPlayerController::SetPlayerEnabledState(bool bPlayerEnabled){
+    if(bPlayerEnabled){
+        GetPawn()->EnableInput(this);
+        // SetShowMouseCursor(true);
+    }
+    else{
+        GetPawn()->DisableInput(this);
+        // SetShowMouseCursor(false);
+    }
+    bShowMouseCursor = bPlayerEnabled;
+}
