@@ -6,6 +6,7 @@
 #include "Tank.h"
 #include "Tower.h"
 #include "ToonTanksPlayerController.h"
+#include "TimerManager.h"
 
 void AToonTanksGameMode::ActorDied(AActor* DeadActor){
     if(DeadActor == Tank){
@@ -23,6 +24,37 @@ void AToonTanksGameMode::ActorDied(AActor* DeadActor){
 void AToonTanksGameMode::BeginPlay(){
     Super::BeginPlay();
 
+    HandleGameStart();
+}
+
+void AToonTanksGameMode::HandleGameStart(){
+    // TO-DO: Start the game
     Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
     ToonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+
+    if(ToonTanksPlayerController){
+        ToonTanksPlayerController->SetPlayerEnabledState(false);
+
+        FTimerHandle PlayerEnableTimerHandle;
+        // FTimerDelegate PlayerEnableTimerDelegate;
+
+        FTimerDelegate PlayerEnableTimerDelegate = FTimerDelegate::CreateUObject(
+            ToonTanksPlayerController,
+            &AToonTanksPlayerController::SetPlayerEnabledState,
+            true
+        );
+
+        // PlayerEnableTimerDelegate.BindLambda([this]() {
+        //     if(ToonTanksPlayerController){
+        //         ToonTanksPlayerController->SetPlayerEnabledState(true);
+        //     }
+        // });
+
+        GetWorldTimerManager().SetTimer(
+            PlayerEnableTimerHandle,
+            PlayerEnableTimerDelegate,
+            StartDelay,
+            false
+        );
+    }
 }
