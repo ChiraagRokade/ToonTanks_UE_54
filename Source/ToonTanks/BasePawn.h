@@ -47,4 +47,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	class UParticleSystem* DeathParticle;
 
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	class USoundBase* DeathSound;
+
 };

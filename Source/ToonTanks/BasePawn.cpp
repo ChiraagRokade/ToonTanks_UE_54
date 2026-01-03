@@ -33,7 +33,11 @@ void ABasePawn::HandleDestruction(){
 	if(DeathParticle){
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation(),GetActorRotation());
 	}
+
 	// TO-DO: Sound effects
+	if(DeathSound){
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
 	// TO-DO: Camera shake
 	
 	// UE_LOG(LogTemp, Warning, TEXT("BasePawn Destroyed"));
