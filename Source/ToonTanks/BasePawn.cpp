@@ -38,9 +38,11 @@ void ABasePawn::HandleDestruction(){
 	if(DeathSound){
 		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 	}
+
 	// TO-DO: Camera shake
-	
-	// UE_LOG(LogTemp, Warning, TEXT("BasePawn Destroyed"));
+	if(DeathCameraShakeClass){
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 }
 
 void ABasePawn::RotateTurret(FVector LookAtTarget){

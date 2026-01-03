@@ -47,7 +47,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	USoundBase* ImpactSound;
 
-public:	
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
+
+	public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
