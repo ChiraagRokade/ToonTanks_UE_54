@@ -68,7 +68,7 @@ void ABasePawn::Fire(){
 // 		false,
 // 		2.f);
 
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileClass,
 		Location,
 		Rotation
